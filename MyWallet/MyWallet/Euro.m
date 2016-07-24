@@ -7,6 +7,7 @@
 //
 
 #import "Euro.h"
+#import "Money-Private.h"
 
 @interface Euro ()
 
@@ -16,7 +17,7 @@
 
 - (Euro*)times:(NSInteger)multiplier
 {
-    Euro* newEuro = [[Euro alloc] initWithAmount:self.amount * multiplier];
+    Euro* newEuro = [[Euro alloc] initWithAmount:[self.amount integerValue] * multiplier];
     return newEuro;
 }
 

@@ -56,6 +56,7 @@
 		D330DF551D4018E8001BC723 /* MoneyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyTest.m; sourceTree = "<group>"; };
 		D330DF561D4018E8001BC723 /* EuroTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EuroTest.m; sourceTree = "<group>"; };
 		D330DF571D4018E8001BC723 /* DollarTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DollarTest.m; sourceTree = "<group>"; };
+		D3F7B14D1D4291AC0044CCE6 /* Money-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Money-Private.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +139,7 @@
 				D330DF4C1D4018A2001BC723 /* Euro.h */,
 				D330DF4D1D4018A2001BC723 /* Dollar.m */,
 				D330DF4E1D4018A2001BC723 /* Dollar.h */,
+				D3F7B14D1D4291AC0044CCE6 /* Money-Private.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -458,6 +460,7 @@
 				D330DF431D4017AC001BC723 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D330DF441D4017AC001BC723 /* Build configuration list for PBXNativeTarget "MyWalletTests" */ = {
 			isa = XCConfigurationList;
@@ -466,6 +469,7 @@
 				D330DF461D4017AC001BC723 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -6,21 +6,16 @@
 //  Copyright © 2016 Alberto Marín García. All rights reserved.
 //
 
+#import "Money-Private.h"
 #import "Money.h"
 #import "NSObject+GNUStepsAddons.h"
-
-@interface Money ()
-
-@property (nonatomic) NSInteger amount;
-
-@end
 
 @implementation Money
 
 - (id)initWithAmount:(NSInteger)amount
 {
     if (self = [super init]) {
-        _amount = amount;
+        _amount = @(amount);
     }
     return self;
 }
