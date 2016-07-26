@@ -9,13 +9,17 @@
 /* Begin PBXBuildFile section */
 		D330DF241D4017AC001BC723 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D330DF231D4017AC001BC723 /* main.m */; };
 		D330DF271D4017AC001BC723 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D330DF261D4017AC001BC723 /* AppDelegate.m */; };
-		D330DF2A1D4017AC001BC723 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D330DF291D4017AC001BC723 /* ViewController.m */; };
 		D330DF2D1D4017AC001BC723 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D330DF2B1D4017AC001BC723 /* Main.storyboard */; };
 		D330DF2F1D4017AC001BC723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D330DF2E1D4017AC001BC723 /* Assets.xcassets */; };
 		D330DF321D4017AC001BC723 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D330DF301D4017AC001BC723 /* LaunchScreen.storyboard */; };
 		D330DF4F1D4018A2001BC723 /* NSObject+GNUStepsAddons.m in Sources */ = {isa = PBXBuildFile; fileRef = D330DF471D4018A2001BC723 /* NSObject+GNUStepsAddons.m */; };
 		D330DF501D4018A2001BC723 /* Money.m in Sources */ = {isa = PBXBuildFile; fileRef = D330DF491D4018A2001BC723 /* Money.m */; };
 		D330DF581D4018E8001BC723 /* MoneyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D330DF551D4018E8001BC723 /* MoneyTest.m */; };
+		D3393CAB1D48111C0049DA6D /* SimpleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3393CA91D48111C0049DA6D /* SimpleViewController.m */; };
+		D3393CAC1D48111C0049DA6D /* SimpleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3393CA91D48111C0049DA6D /* SimpleViewController.m */; };
+		D3393CAD1D48111C0049DA6D /* SimpleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3393CAA1D48111C0049DA6D /* SimpleViewController.xib */; };
+		D3393CAE1D48111C0049DA6D /* SimpleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3393CAA1D48111C0049DA6D /* SimpleViewController.xib */; };
+		D3393CB11D48117C0049DA6D /* ControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D3393CB01D48117C0049DA6D /* ControllerTest.m */; };
 		D39B568B1D4509B7008329C4 /* Money.m in Sources */ = {isa = PBXBuildFile; fileRef = D330DF491D4018A2001BC723 /* Money.m */; };
 		D39B568F1D46B282008329C4 /* BrokerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B568E1D46B282008329C4 /* BrokerTest.m */; };
 		D39B56921D46B411008329C4 /* Broker.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B56911D46B411008329C4 /* Broker.m */; };
@@ -40,8 +44,6 @@
 		D330DF231D4017AC001BC723 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D330DF251D4017AC001BC723 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D330DF261D4017AC001BC723 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D330DF281D4017AC001BC723 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D330DF291D4017AC001BC723 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D330DF2C1D4017AC001BC723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D330DF2E1D4017AC001BC723 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D330DF311D4017AC001BC723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,6 +55,10 @@
 		D330DF491D4018A2001BC723 /* Money.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Money.m; sourceTree = "<group>"; };
 		D330DF4A1D4018A2001BC723 /* Money.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Money.h; sourceTree = "<group>"; };
 		D330DF551D4018E8001BC723 /* MoneyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyTest.m; sourceTree = "<group>"; };
+		D3393CA81D48111C0049DA6D /* SimpleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleViewController.h; sourceTree = "<group>"; };
+		D3393CA91D48111C0049DA6D /* SimpleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleViewController.m; sourceTree = "<group>"; };
+		D3393CAA1D48111C0049DA6D /* SimpleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleViewController.xib; sourceTree = "<group>"; };
+		D3393CB01D48117C0049DA6D /* ControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControllerTest.m; sourceTree = "<group>"; };
 		D39B568E1D46B282008329C4 /* BrokerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrokerTest.m; sourceTree = "<group>"; };
 		D39B56901D46B411008329C4 /* Broker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Broker.h; sourceTree = "<group>"; };
 		D39B56911D46B411008329C4 /* Broker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Broker.m; sourceTree = "<group>"; };
@@ -100,12 +106,11 @@
 		D330DF211D4017AC001BC723 /* MyWallet */ = {
 			isa = PBXGroup;
 			children = (
+				D3393CA71D4810F60049DA6D /* Controllers */,
 				D330DF541D4018C1001BC723 /* Categories */,
 				D330DF531D4018AB001BC723 /* Models */,
 				D330DF251D4017AC001BC723 /* AppDelegate.h */,
 				D330DF261D4017AC001BC723 /* AppDelegate.m */,
-				D330DF281D4017AC001BC723 /* ViewController.h */,
-				D330DF291D4017AC001BC723 /* ViewController.m */,
 				D330DF2B1D4017AC001BC723 /* Main.storyboard */,
 				D330DF2E1D4017AC001BC723 /* Assets.xcassets */,
 				D330DF301D4017AC001BC723 /* LaunchScreen.storyboard */,
@@ -126,6 +131,7 @@
 		D330DF3B1D4017AC001BC723 /* MyWalletTests */ = {
 			isa = PBXGroup;
 			children = (
+				D3393CAF1D4811600049DA6D /* Controllers */,
 				D330DF5B1D4018F8001BC723 /* Models */,
 				D330DF3E1D4017AC001BC723 /* Info.plist */,
 			);
@@ -162,6 +168,24 @@
 				D39B56941D46CCFE008329C4 /* WalletTest.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		D3393CA71D4810F60049DA6D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D3393CA81D48111C0049DA6D /* SimpleViewController.h */,
+				D3393CA91D48111C0049DA6D /* SimpleViewController.m */,
+				D3393CAA1D48111C0049DA6D /* SimpleViewController.xib */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		D3393CAF1D4811600049DA6D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D3393CB01D48117C0049DA6D /* ControllerTest.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +270,7 @@
 			files = (
 				D330DF321D4017AC001BC723 /* LaunchScreen.storyboard in Resources */,
 				D330DF2F1D4017AC001BC723 /* Assets.xcassets in Resources */,
+				D3393CAD1D48111C0049DA6D /* SimpleViewController.xib in Resources */,
 				D330DF2D1D4017AC001BC723 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,6 +279,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3393CAE1D48111C0049DA6D /* SimpleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,11 +290,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D330DF2A1D4017AC001BC723 /* ViewController.m in Sources */,
 				D330DF4F1D4018A2001BC723 /* NSObject+GNUStepsAddons.m in Sources */,
 				D39B56981D46D1CF008329C4 /* Wallet.m in Sources */,
 				D330DF501D4018A2001BC723 /* Money.m in Sources */,
 				D330DF271D4017AC001BC723 /* AppDelegate.m in Sources */,
+				D3393CAB1D48111C0049DA6D /* SimpleViewController.m in Sources */,
 				D39B56921D46B411008329C4 /* Broker.m in Sources */,
 				D330DF241D4017AC001BC723 /* main.m in Sources */,
 			);
@@ -282,8 +308,10 @@
 				D39B56951D46CCFE008329C4 /* WalletTest.m in Sources */,
 				D39B56991D46D1CF008329C4 /* Wallet.m in Sources */,
 				D39B568F1D46B282008329C4 /* BrokerTest.m in Sources */,
+				D3393CAC1D48111C0049DA6D /* SimpleViewController.m in Sources */,
 				D330DF581D4018E8001BC723 /* MoneyTest.m in Sources */,
 				D39B568B1D4509B7008329C4 /* Money.m in Sources */,
+				D3393CB11D48117C0049DA6D /* ControllerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
