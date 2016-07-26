@@ -6,6 +6,7 @@
 //  Copyright © 2016 Alberto Marín García. All rights reserved.
 //
 
+#import "Broker.h"
 #import "Money.h"
 #import "NSObject+GNUStepsAddons.h"
 
@@ -33,19 +34,39 @@
   return self;
 }
 
-- (id)times:(NSInteger)multiplier {
+- (id<Money>)times:(NSInteger)multiplier {
   Money *newMoney =
       [[Money alloc] initWithAmount:([self.amount integerValue] * multiplier)
                            currency:self.currency];
   return newMoney;
 }
 
-- (Money *)plus:(Money *)other {
+- (id<Money>)plus:(Money *)other {
   NSInteger totalAmount =
       [self.amount integerValue] + [other.amount integerValue];
   Money *total =
       [[Money alloc] initWithAmount:totalAmount currency:self.currency];
   return total;
+}
+
+- (id<Money>)reduceToCurrency:(NSString *)currency withBroker:(Broker *)broker {
+  // Comprobamos que la divisas de origen y destino son las mismas
+  if ([self.currency isEqual:currency])
+    return self;
+
+  // Comprobamos que hay tasa de cambio
+  double rate = [[broker.rates
+      objectForKey:[broker keyFromCurrency:self.currency toCurrency:currency]]
+      doubleValue];
+  if (rate == 0) {
+    [NSException raise:@"NoConversionRateException"
+                format:@"Must have a conversion rate from %@ to %@",
+                       self.currency, currency];
+  }
+
+  NSInteger newAmount = [self.amount integerValue] * rate;
+  Money *newMoney = [[Money alloc] initWithAmount:newAmount currency:currency];
+  return newMoney;
 }
 
 #pragma mark - Overwritten
@@ -57,12 +78,12 @@
 }
 
 - (NSString *)description {
-  return [NSString
-      stringWithFormat:@"<%@ %ld>", [self class], (long)[self amount]];
+  return [NSString stringWithFormat:@"<%@: %@ %@>", [self class], self.currency,
+                                    self.amount];
 }
 
 - (NSUInteger)hash {
-  return (NSUInteger)self.amount;
+  return [self.amount integerValue];
 }
 
 @end

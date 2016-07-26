@@ -17,6 +17,12 @@
 		D330DF501D4018A2001BC723 /* Money.m in Sources */ = {isa = PBXBuildFile; fileRef = D330DF491D4018A2001BC723 /* Money.m */; };
 		D330DF581D4018E8001BC723 /* MoneyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D330DF551D4018E8001BC723 /* MoneyTest.m */; };
 		D39B568B1D4509B7008329C4 /* Money.m in Sources */ = {isa = PBXBuildFile; fileRef = D330DF491D4018A2001BC723 /* Money.m */; };
+		D39B568F1D46B282008329C4 /* BrokerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B568E1D46B282008329C4 /* BrokerTest.m */; };
+		D39B56921D46B411008329C4 /* Broker.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B56911D46B411008329C4 /* Broker.m */; };
+		D39B56931D46B411008329C4 /* Broker.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B56911D46B411008329C4 /* Broker.m */; };
+		D39B56951D46CCFE008329C4 /* WalletTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B56941D46CCFE008329C4 /* WalletTest.m */; };
+		D39B56981D46D1CF008329C4 /* Wallet.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B56971D46D1CF008329C4 /* Wallet.m */; };
+		D39B56991D46D1CF008329C4 /* Wallet.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B56971D46D1CF008329C4 /* Wallet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +53,12 @@
 		D330DF491D4018A2001BC723 /* Money.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Money.m; sourceTree = "<group>"; };
 		D330DF4A1D4018A2001BC723 /* Money.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Money.h; sourceTree = "<group>"; };
 		D330DF551D4018E8001BC723 /* MoneyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyTest.m; sourceTree = "<group>"; };
+		D39B568E1D46B282008329C4 /* BrokerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrokerTest.m; sourceTree = "<group>"; };
+		D39B56901D46B411008329C4 /* Broker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Broker.h; sourceTree = "<group>"; };
+		D39B56911D46B411008329C4 /* Broker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Broker.m; sourceTree = "<group>"; };
+		D39B56941D46CCFE008329C4 /* WalletTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletTest.m; sourceTree = "<group>"; };
+		D39B56961D46D1CF008329C4 /* Wallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wallet.h; sourceTree = "<group>"; };
+		D39B56971D46D1CF008329C4 /* Wallet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wallet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +137,10 @@
 			children = (
 				D330DF491D4018A2001BC723 /* Money.m */,
 				D330DF4A1D4018A2001BC723 /* Money.h */,
+				D39B56901D46B411008329C4 /* Broker.h */,
+				D39B56911D46B411008329C4 /* Broker.m */,
+				D39B56961D46D1CF008329C4 /* Wallet.h */,
+				D39B56971D46D1CF008329C4 /* Wallet.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -142,6 +158,8 @@
 			isa = PBXGroup;
 			children = (
 				D330DF551D4018E8001BC723 /* MoneyTest.m */,
+				D39B568E1D46B282008329C4 /* BrokerTest.m */,
+				D39B56941D46CCFE008329C4 /* WalletTest.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -248,8 +266,10 @@
 			files = (
 				D330DF2A1D4017AC001BC723 /* ViewController.m in Sources */,
 				D330DF4F1D4018A2001BC723 /* NSObject+GNUStepsAddons.m in Sources */,
+				D39B56981D46D1CF008329C4 /* Wallet.m in Sources */,
 				D330DF501D4018A2001BC723 /* Money.m in Sources */,
 				D330DF271D4017AC001BC723 /* AppDelegate.m in Sources */,
+				D39B56921D46B411008329C4 /* Broker.m in Sources */,
 				D330DF241D4017AC001BC723 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +278,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D39B56931D46B411008329C4 /* Broker.m in Sources */,
+				D39B56951D46CCFE008329C4 /* WalletTest.m in Sources */,
+				D39B56991D46D1CF008329C4 /* Wallet.m in Sources */,
+				D39B568F1D46B282008329C4 /* BrokerTest.m in Sources */,
 				D330DF581D4018E8001BC723 /* MoneyTest.m in Sources */,
 				D39B568B1D4509B7008329C4 /* Money.m in Sources */,
 			);
