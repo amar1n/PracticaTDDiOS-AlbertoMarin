@@ -11,4 +11,6 @@
 
 @interface Wallet : NSObject <Money>
 
+@property(nonatomic, readonly) NSUInteger count;
+
 @end
