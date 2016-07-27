@@ -12,78 +12,87 @@
 
 @interface Money ()
 
-@property(nonatomic, strong) NSNumber *amount;
+@property (nonatomic, strong) NSNumber* amount;
 
 @end
 
 @implementation Money
 
-+ (id)euroWithAmount:(NSInteger)amount {
-  return [[Money alloc] initWithAmount:amount currency:@"EUR"];
++ (id)euroWithAmount:(NSInteger)amount
+{
+    return [[Money alloc] initWithAmount:amount currency:@"EUR"];
 }
 
-+ (id)dollarWithAmount:(NSInteger)amount {
-  return [[Money alloc] initWithAmount:amount currency:@"USD"];
++ (id)dollarWithAmount:(NSInteger)amount
+{
+    return [[Money alloc] initWithAmount:amount currency:@"USD"];
 }
 
-- (id)initWithAmount:(NSInteger)amount currency:(NSString *)currency {
-  if (self = [super init]) {
-    _amount = @(amount);
-    _currency = currency;
-  }
-  return self;
-}
-
-- (id<Money>)times:(NSInteger)multiplier {
-  Money *newMoney =
-      [[Money alloc] initWithAmount:([self.amount integerValue] * multiplier)
-                           currency:self.currency];
-  return newMoney;
-}
-
-- (id<Money>)plus:(Money *)other {
-  NSInteger totalAmount =
-      [self.amount integerValue] + [other.amount integerValue];
-  Money *total =
-      [[Money alloc] initWithAmount:totalAmount currency:self.currency];
-  return total;
-}
-
-- (id<Money>)reduceToCurrency:(NSString *)currency withBroker:(Broker *)broker {
-  // Comprobamos que la divisas de origen y destino son las mismas
-  if ([self.currency isEqual:currency])
+- (id)initWithAmount:(NSInteger)amount currency:(NSString*)currency
+{
+    if (self = [super init]) {
+        _amount = @(amount);
+        _currency = currency;
+    }
     return self;
+}
 
-  // Comprobamos que hay tasa de cambio
-  double rate = [[broker.rates
-      objectForKey:[broker keyFromCurrency:self.currency toCurrency:currency]]
-      doubleValue];
-  if (rate == 0) {
-    [NSException raise:@"NoConversionRateException"
-                format:@"Must have a conversion rate from %@ to %@",
-                       self.currency, currency];
-  }
+- (id<Money>)times:(NSInteger)multiplier
+{
+    Money* newMoney =
+        [[Money alloc] initWithAmount:([self.amount integerValue] * multiplier)
+                             currency:self.currency];
+    return newMoney;
+}
 
-  NSInteger newAmount = [self.amount integerValue] * rate;
-  Money *newMoney = [[Money alloc] initWithAmount:newAmount currency:currency];
-  return newMoney;
+- (id<Money>)plus:(Money*)other
+{
+    NSInteger totalAmount =
+        [self.amount integerValue] + [other.amount integerValue];
+    Money* total =
+        [[Money alloc] initWithAmount:totalAmount currency:self.currency];
+    return total;
+}
+
+- (id<Money>)reduceToCurrency:(NSString*)currency withBroker:(Broker*)broker
+{
+    // Comprobamos que la divisas de origen y destino son las mismas
+    if ([self.currency isEqual:currency])
+        return self;
+
+    // Comprobamos que hay tasa de cambio
+    double rate = [[broker.rates
+        objectForKey:[broker keyFromCurrency:self.currency toCurrency:currency]]
+        doubleValue];
+    if (rate == 0) {
+        [NSException raise:@"NoConversionRateException"
+                    format:@"Must have a conversion rate from %@ to %@",
+                    self.currency, currency];
+    }
+
+    NSInteger newAmount = [self.amount integerValue] * rate;
+    Money* newMoney = [[Money alloc] initWithAmount:newAmount currency:currency];
+    return newMoney;
 }
 
 #pragma mark - Overwritten
-- (BOOL)isEqual:(id)object {
-  if ([self.currency isEqual:[object currency]]) {
-    return self.amount == [object amount];
-  }
-  return NO;
+- (BOOL)isEqual:(id)object
+{
+    if ([self.currency isEqual:[object currency]]) {
+        return self.amount == [object amount];
+    }
+    return NO;
 }
 
-- (NSString *)description {
-  return [NSString stringWithFormat:@"<%@: %@ %@>", [self class], self.currency,
-                                    self.amount];
+- (NSString*)description
+{
+    return [NSString stringWithFormat:@"<%@: %@ %@>", [self class], self.currency,
+                     self.amount];
 }
 
-- (NSUInteger)hash {
-  return [self.amount integerValue];
+- (NSUInteger)hash
+{
+    return [self.amount integerValue];
 }
 
 @end

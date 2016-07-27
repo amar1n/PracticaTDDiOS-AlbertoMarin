@@ -11,29 +11,32 @@
 
 @interface WalletTableViewController ()
 
-@property(nonatomic, strong) Wallet *model;
+@property (nonatomic, strong) Wallet* model;
 
 @end
 
 @implementation WalletTableViewController
 
-- (id)initWithModel:(Wallet *)model {
+- (id)initWithModel:(Wallet*)model
+{
 
-  if (self = [super initWithStyle:UITableViewStylePlain]) {
-    _model = model;
-  }
-  return self;
+    if (self = [super initWithStyle:UITableViewStylePlain]) {
+        _model = model;
+    }
+    return self;
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
+- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
+{
+    return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section {
-  return [self.model count] + 1;
+- (NSInteger)tableView:(UITableView*)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
+    return [self.model count] + 1;
 }
 
 /*

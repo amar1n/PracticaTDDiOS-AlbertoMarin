@@ -14,8 +14,9 @@
 
 @implementation SimpleViewController
 
-- (IBAction)displayText:(id)sender {
-  UIButton *btn = sender;
-  self.displayLabel.text = btn.titleLabel.text;
+- (IBAction)displayText:(id)sender
+{
+    UIButton* btn = sender;
+    self.displayLabel.text = btn.titleLabel.text;
 }
 @end

@@ -10,7 +10,7 @@
 
 @interface SimpleViewController : UIViewController
 
-@property(weak, nonatomic) IBOutlet UILabel *displayLabel;
+@property (weak, nonatomic) IBOutlet UILabel* displayLabel;
 
 - (IBAction)displayText:(id)sender;
 
