@@ -35,7 +35,7 @@
     self.simpleVC.displayLabel = self.label;
 
     self.wallet = [[Wallet alloc] initWithAmount:[NSNumber numberWithDouble:1.0] currency:@"USD"];
-    [self.wallet plus:[Money euroWithAmount:[NSNumber numberWithDouble:1.0]]];
+    [self.wallet addMoney:[Money euroWithAmount:[NSNumber numberWithDouble:1.0]]];
     self.walletVC = [[WalletTableViewController alloc] initWithModel:self.wallet broker:nil];
 }
 
@@ -70,9 +70,14 @@
 
 - (void)testThatNumberOfCellsIsNumberOfMoneysPlusOne
 {
-    // Sólo tenía sentido en el curso online, al hacer la práctica ya no aplica
-    //    XCTAssertEqual(self.wallet.count + 1, [self.walletVC tableView:nil numberOfRowsInSection:0],
-    //        @"Number of cells is the number of moneys plus one (the total)");
+    NSArray* currencies = [self.wallet currencies];
+    NSInteger section = 0;
+
+    for (NSString* currency in currencies) {
+        XCTAssertEqual([[self.wallet moneysByCurrency:currency] count] + 1, [self.walletVC tableView:nil numberOfRowsInSection:section],
+            @"Number of cells is the number of moneys plus one (the total)");
+        section = section + 1;
+    }
 }
 
 @end
