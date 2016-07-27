@@ -12,6 +12,7 @@
 @interface Wallet ()
 
 @property (strong, nonatomic) NSMutableArray* moneys;
+@property (strong, nonatomic) NSMutableDictionary* moneysByCurrency;
 
 @end
 
@@ -22,26 +23,43 @@
     return [self.moneys count];
 }
 
-- (id)initWithAmount:(NSInteger)amount currency:(NSString*)currency
+- (NSUInteger)countCurrencies
+{
+    return [self.moneysByCurrency count];
+}
+
+// Retorna un arreglo de Strings que representan a las currencies, ordenadas alfabeticamente
+- (NSArray*)currencies
+{
+    NSArray* currencies = [self.moneysByCurrency allKeys];
+    return [currencies sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+}
+
+- (id)initWithAmount:(NSNumber*)amount currency:(NSString*)currency
 {
     if (self = [super init]) {
         Money* money = [[Money alloc] initWithAmount:amount currency:currency];
         _moneys = [NSMutableArray array];
         [_moneys addObject:money];
+
+        _moneysByCurrency = [NSMutableDictionary dictionary];
+        NSMutableArray* moneysOfOneCurrency = [NSMutableArray array];
+        [moneysOfOneCurrency addObject:money];
+        [_moneysByCurrency setObject:moneysOfOneCurrency forKey:[money currency]];
     }
     return self;
 }
 
 - (id<Money>)plus:(Money*)other
 {
-    [self.moneys addObject:other];
+    [self addMoney:other];
+
     return self;
 }
 
 - (id<Money>)times:(NSInteger)multiplier
 {
-    NSMutableArray* newMoneys =
-        [NSMutableArray arrayWithCapacity:self.moneys.count];
+    NSMutableArray* newMoneys = [NSMutableArray arrayWithCapacity:self.moneys.count];
     for (Money* item in self.moneys) {
         Money* newMoney = [item times:multiplier];
         [newMoneys addObject:newMoney];
@@ -58,6 +76,42 @@
         result = [result plus:[item reduceToCurrency:currency withBroker:broker]];
     }
     return result;
+}
+
+- (Money*)moneyAtIndex:(int)index
+{
+    return [self.moneys objectAtIndex:index];
+}
+
+- (void)addMoney:(Money*)money
+{
+    [self.moneys addObject:money];
+
+    NSMutableArray* moneysOfOneCurrency = [self.moneysByCurrency objectForKey:[money currency]];
+    if (moneysOfOneCurrency == nil) {
+        moneysOfOneCurrency = [NSMutableArray array];
+    }
+    [moneysOfOneCurrency addObject:money];
+    [self.moneysByCurrency setObject:moneysOfOneCurrency forKey:[money currency]];
+}
+
+- (void)takeMoney:(Money*)money
+{
+    [self.moneys removeObject:money];
+}
+
+// Retorna un arreglo de Money ordenados por su cantidad de manera ascendente
+- (NSArray*)moneysByCurrency:(NSString*)currency
+{
+    NSMutableArray* moneysOfOneCurrency = [self.moneysByCurrency objectForKey:currency];
+    if (moneysOfOneCurrency == nil) {
+        return [NSArray array];
+    }
+
+    NSArray* result = [moneysOfOneCurrency copy];
+    return [result sortedArrayUsingComparator:^(Money* m1, Money* m2) {
+        return [[m1 amount] compare:[m2 amount]];
+    }];
 }
 
 #pragma mark - Notifications

@@ -12,7 +12,7 @@
 
 @protocol Money <NSObject>
 
-- (id)initWithAmount:(NSInteger)amount currency:(NSString*)currency;
+- (id)initWithAmount:(NSNumber*)amount currency:(NSString*)currency;
 - (id<Money>)times:(NSInteger)multiplier;
 - (id<Money>)plus:(Money*)other;
 - (id<Money>)reduceToCurrency:(NSString*)currency withBroker:(Broker*)broker;
@@ -24,7 +24,7 @@
 @property (readonly, nonatomic) NSString* currency;
 @property (readonly, nonatomic, strong) NSNumber* amount;
 
-+ (id)euroWithAmount:(NSInteger)amount;
-+ (id)dollarWithAmount:(NSInteger)amount;
++ (id)euroWithAmount:(NSNumber*)amount;
++ (id)dollarWithAmount:(NSNumber*)amount;
 
 @end

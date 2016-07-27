@@ -23,7 +23,7 @@
 {
     [super setUp];
     self.emptyBroker = [Broker new];
-    self.oneDollar = [Money dollarWithAmount:1];
+    self.oneDollar = [Money dollarWithAmount:[NSNumber numberWithDouble:1.0]];
 }
 
 - (void)tearDown
@@ -35,7 +35,7 @@
 
 - (void)testSimpleReduction
 {
-    Money* sum = [[Money dollarWithAmount:5] plus:[Money dollarWithAmount:5]];
+    Money* sum = [[Money dollarWithAmount:[NSNumber numberWithDouble:5.0]] plus:[Money dollarWithAmount:[NSNumber numberWithDouble:5.0]]];
     Money* reduced = [self.emptyBroker reduce:sum toCurrency:@"USD"];
     XCTAssertEqualObjects(sum, reduced,
         @"Conversion to same currency should be a NOP");
@@ -46,8 +46,8 @@
 {
     [self.emptyBroker addRate:2 fromCurrency:@"EUR" toCurrency:@"USD"];
 
-    Money* dollars = [Money dollarWithAmount:10];
-    Money* euros = [Money euroWithAmount:5];
+    Money* dollars = [Money dollarWithAmount:[NSNumber numberWithDouble:10.0]];
+    Money* euros = [Money euroWithAmount:[NSNumber numberWithDouble:5.0]];
 
     Money* converted = [self.emptyBroker reduce:dollars toCurrency:@"EUR"];
 
@@ -62,8 +62,7 @@
 
 - (void)testThatNilConversionDoesNotChangeMoney
 {
-    XCTAssertEqualObjects(self.oneDollar, [self.emptyBroker reduce:self.oneDollar
-                                                        toCurrency:@"USD"],
+    XCTAssertEqualObjects(self.oneDollar, [self.emptyBroker reduce:self.oneDollar toCurrency:@"USD"],
         @"A nil conversion should have no effect");
 }
 

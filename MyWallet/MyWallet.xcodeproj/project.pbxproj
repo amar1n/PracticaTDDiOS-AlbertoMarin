@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D31935821D496D11001EEB11 /* SubtotalViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D31935811D496D11001EEB11 /* SubtotalViewCell.xib */; };
+		D31935851D4970ED001EEB11 /* SubtotalViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D31935841D4970ED001EEB11 /* SubtotalViewCell.m */; };
+		D31935871D497ABF001EEB11 /* TotalViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D31935861D497ABF001EEB11 /* TotalViewCell.xib */; };
+		D319358A1D497B6E001EEB11 /* TotalViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D31935891D497B6E001EEB11 /* TotalViewCell.m */; };
 		D330DF241D4017AC001BC723 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D330DF231D4017AC001BC723 /* main.m */; };
 		D330DF271D4017AC001BC723 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D330DF261D4017AC001BC723 /* AppDelegate.m */; };
 		D330DF2D1D4017AC001BC723 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D330DF2B1D4017AC001BC723 /* Main.storyboard */; };
@@ -45,6 +49,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D31935811D496D11001EEB11 /* SubtotalViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubtotalViewCell.xib; sourceTree = "<group>"; };
+		D31935831D4970ED001EEB11 /* SubtotalViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubtotalViewCell.h; sourceTree = "<group>"; };
+		D31935841D4970ED001EEB11 /* SubtotalViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubtotalViewCell.m; sourceTree = "<group>"; };
+		D31935861D497ABF001EEB11 /* TotalViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalViewCell.xib; sourceTree = "<group>"; };
+		D31935881D497B6E001EEB11 /* TotalViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalViewCell.h; sourceTree = "<group>"; };
+		D31935891D497B6E001EEB11 /* TotalViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalViewCell.m; sourceTree = "<group>"; };
 		D330DF1F1D4017AC001BC723 /* MyWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D330DF231D4017AC001BC723 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D330DF251D4017AC001BC723 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -96,6 +106,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D31935801D496BC9001EEB11 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D31935811D496D11001EEB11 /* SubtotalViewCell.xib */,
+				D31935831D4970ED001EEB11 /* SubtotalViewCell.h */,
+				D31935841D4970ED001EEB11 /* SubtotalViewCell.m */,
+				D31935861D497ABF001EEB11 /* TotalViewCell.xib */,
+				D31935881D497B6E001EEB11 /* TotalViewCell.h */,
+				D31935891D497B6E001EEB11 /* TotalViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		D330DF161D4017AC001BC723 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +140,7 @@
 		D330DF211D4017AC001BC723 /* MyWallet */ = {
 			isa = PBXGroup;
 			children = (
+				D31935801D496BC9001EEB11 /* Views */,
 				D3393CA71D4810F60049DA6D /* Controllers */,
 				D330DF541D4018C1001BC723 /* Categories */,
 				D330DF531D4018AB001BC723 /* Models */,
@@ -304,6 +328,8 @@
 				D330DF321D4017AC001BC723 /* LaunchScreen.storyboard in Resources */,
 				D330DF2F1D4017AC001BC723 /* Assets.xcassets in Resources */,
 				D3393CAD1D48111C0049DA6D /* SimpleViewController.xib in Resources */,
+				D31935871D497ABF001EEB11 /* TotalViewCell.xib in Resources */,
+				D31935821D496D11001EEB11 /* SubtotalViewCell.xib in Resources */,
 				D330DF2D1D4017AC001BC723 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,8 +354,10 @@
 				D330DF501D4018A2001BC723 /* Money.m in Sources */,
 				D330DF271D4017AC001BC723 /* AppDelegate.m in Sources */,
 				D3393CAB1D48111C0049DA6D /* SimpleViewController.m in Sources */,
+				D319358A1D497B6E001EEB11 /* TotalViewCell.m in Sources */,
 				D39B56921D46B411008329C4 /* Broker.m in Sources */,
 				D3393CB41D481C630049DA6D /* WalletTableViewController.m in Sources */,
+				D31935851D4970ED001EEB11 /* SubtotalViewCell.m in Sources */,
 				D330DF241D4017AC001BC723 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

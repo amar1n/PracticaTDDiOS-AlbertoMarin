@@ -18,20 +18,20 @@
 
 @implementation Money
 
-+ (id)euroWithAmount:(NSInteger)amount
++ (id)euroWithAmount:(NSNumber*)amount
 {
     return [[Money alloc] initWithAmount:amount currency:@"EUR"];
 }
 
-+ (id)dollarWithAmount:(NSInteger)amount
++ (id)dollarWithAmount:(NSNumber*)amount
 {
     return [[Money alloc] initWithAmount:amount currency:@"USD"];
 }
 
-- (id)initWithAmount:(NSInteger)amount currency:(NSString*)currency
+- (id)initWithAmount:(NSNumber*)amount currency:(NSString*)currency
 {
     if (self = [super init]) {
-        _amount = @(amount);
+        _amount = amount;
         _currency = currency;
     }
     return self;
@@ -39,18 +39,15 @@
 
 - (id<Money>)times:(NSInteger)multiplier
 {
-    Money* newMoney =
-        [[Money alloc] initWithAmount:([self.amount integerValue] * multiplier)
-                             currency:self.currency];
+    Money* newMoney = [[Money alloc] initWithAmount:[NSNumber numberWithDouble:[self.amount doubleValue] * multiplier]
+                                           currency:self.currency];
     return newMoney;
 }
 
 - (id<Money>)plus:(Money*)other
 {
-    NSInteger totalAmount =
-        [self.amount integerValue] + [other.amount integerValue];
-    Money* total =
-        [[Money alloc] initWithAmount:totalAmount currency:self.currency];
+    NSNumber* totalAmount = [NSNumber numberWithDouble:[self.amount doubleValue] + [other.amount doubleValue]];
+    Money* total = [[Money alloc] initWithAmount:totalAmount currency:self.currency];
     return total;
 }
 
@@ -61,8 +58,7 @@
         return self;
 
     // Comprobamos que hay tasa de cambio
-    double rate = [[broker.rates
-        objectForKey:[broker keyFromCurrency:self.currency toCurrency:currency]]
+    double rate = [[broker.rates objectForKey:[broker keyFromCurrency:self.currency toCurrency:currency]]
         doubleValue];
     if (rate == 0) {
         [NSException raise:@"NoConversionRateException"
@@ -70,7 +66,7 @@
                     self.currency, currency];
     }
 
-    NSInteger newAmount = [self.amount integerValue] * rate;
+    NSNumber* newAmount = [NSNumber numberWithDouble:[self.amount doubleValue] * rate];
     Money* newMoney = [[Money alloc] initWithAmount:newAmount currency:currency];
     return newMoney;
 }
@@ -86,8 +82,7 @@
 
 - (NSString*)description
 {
-    return [NSString stringWithFormat:@"<%@: %@ %@>", [self class], self.currency,
-                     self.amount];
+    return [NSString stringWithFormat:@"<%@: %@ %@>", [self class], self.currency, self.amount];
 }
 
 - (NSUInteger)hash

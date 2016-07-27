@@ -11,6 +11,6 @@
 
 @interface WalletTableViewController : UITableViewController
 
-- (id)initWithModel:(Wallet*)model;
+- (id)initWithModel:(Wallet*)model broker:(Broker*)broker;
 
 @end
