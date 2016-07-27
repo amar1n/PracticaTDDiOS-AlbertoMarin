@@ -7,51 +7,67 @@
 //
 
 #import "Wallet.h"
+#import <UIKit/UIKit.h>
 
 @interface Wallet ()
 
-@property(strong, nonatomic) NSMutableArray *moneys;
+@property (strong, nonatomic) NSMutableArray* moneys;
 
 @end
 
 @implementation Wallet
 
-- (NSUInteger)count {
-  return [self.moneys count];
+- (NSUInteger)count
+{
+    return [self.moneys count];
 }
 
-- (id)initWithAmount:(NSInteger)amount currency:(NSString *)currency {
-  if (self = [super init]) {
-    Money *money = [[Money alloc] initWithAmount:amount currency:currency];
-    _moneys = [NSMutableArray array];
-    [_moneys addObject:money];
-  }
-  return self;
+- (id)initWithAmount:(NSInteger)amount currency:(NSString*)currency
+{
+    if (self = [super init]) {
+        Money* money = [[Money alloc] initWithAmount:amount currency:currency];
+        _moneys = [NSMutableArray array];
+        [_moneys addObject:money];
+    }
+    return self;
 }
 
-- (id<Money>)plus:(Money *)other {
-  [self.moneys addObject:other];
-  return self;
+- (id<Money>)plus:(Money*)other
+{
+    [self.moneys addObject:other];
+    return self;
 }
 
-- (id<Money>)times:(NSInteger)multiplier {
-  NSMutableArray *newMoneys =
-      [NSMutableArray arrayWithCapacity:self.moneys.count];
-  for (Money *item in self.moneys) {
-    Money *newMoney = [item times:multiplier];
-    [newMoneys addObject:newMoney];
-  }
-  self.moneys = newMoneys;
-  return self;
+- (id<Money>)times:(NSInteger)multiplier
+{
+    NSMutableArray* newMoneys =
+        [NSMutableArray arrayWithCapacity:self.moneys.count];
+    for (Money* item in self.moneys) {
+        Money* newMoney = [item times:multiplier];
+        [newMoneys addObject:newMoney];
+    }
+    self.moneys = newMoneys;
+    return self;
 }
 
-- (id<Money>)reduceToCurrency:(NSString *)currency withBroker:(Broker *)broker {
-  Money *result = [[Money alloc] initWithAmount:0 currency:currency];
+- (id<Money>)reduceToCurrency:(NSString*)currency withBroker:(Broker*)broker
+{
+    Money* result = [[Money alloc] initWithAmount:0 currency:currency];
 
-  for (Money *item in self.moneys) {
-    result = [result plus:[item reduceToCurrency:currency withBroker:broker]];
-  }
-  return result;
+    for (Money* item in self.moneys) {
+        result = [result plus:[item reduceToCurrency:currency withBroker:broker]];
+    }
+    return result;
+}
+
+#pragma mark - Notifications
+- (void)subscribeToMemoryWarning:(NSNotificationCenter*)nc
+{
+    [nc addObserver:self selector:@selector(dumpToDisk:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+}
+
+- (void)dumpToDisk:(NSNotification*)notification
+{
 }
 
 @end

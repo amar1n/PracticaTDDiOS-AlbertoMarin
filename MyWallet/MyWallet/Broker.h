@@ -11,13 +11,14 @@
 
 @interface Broker : NSObject
 
-@property(strong, nonatomic) NSMutableDictionary *rates;
+@property (strong, nonatomic) NSMutableDictionary* rates;
 
-- (Money *)reduce:(id<Money>)money toCurrency:(NSString *)currency;
+- (Money*)reduce:(id<Money>)money toCurrency:(NSString*)currency;
 - (void)addRate:(NSInteger)rate
-   fromCurrency:(NSString *)fromCurrency
-     toCurrency:(NSString *)toCurrency;
-- (NSString *)keyFromCurrency:(NSString *)fromCurrency
-                   toCurrency:(NSString *)toCurrency;
+   fromCurrency:(NSString*)fromCurrency
+     toCurrency:(NSString*)toCurrency;
+- (NSString*)keyFromCurrency:(NSString*)fromCurrency
+                  toCurrency:(NSString*)toCurrency;
+- (void)parseJSONRates:(NSData*)jsonData;
 
 @end
