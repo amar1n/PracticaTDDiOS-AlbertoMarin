@@ -44,7 +44,7 @@
 // 10$ = 5€ 2:1
 - (void)testReduction
 {
-    [self.emptyBroker addRate:2 fromCurrency:@"EUR" toCurrency:@"USD"];
+    [self.emptyBroker addRate:[NSNumber numberWithDouble:2.0] fromCurrency:@"EUR" toCurrency:@"USD"];
 
     Money* dollars = [Money dollarWithAmount:[NSNumber numberWithDouble:10.0]];
     Money* euros = [Money euroWithAmount:[NSNumber numberWithDouble:5.0]];

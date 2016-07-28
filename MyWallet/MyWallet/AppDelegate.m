@@ -29,7 +29,7 @@
     [wallet addMoney:[Money euroWithAmount:[NSNumber numberWithDouble:1.0]]];
 
     Broker* broker = [Broker new];
-    [broker addRate:2 fromCurrency:@"EUR" toCurrency:@"USD"];
+    [broker initRates];
 
     WalletTableViewController* walletVC = [[WalletTableViewController alloc] initWithModel:wallet broker:broker];
     UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:walletVC];

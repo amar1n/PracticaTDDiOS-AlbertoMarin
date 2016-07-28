@@ -75,7 +75,7 @@
 - (BOOL)isEqual:(id)object
 {
     if ([self.currency isEqual:[object currency]]) {
-        return self.amount == [object amount];
+        return [self.amount doubleValue] == [[object amount] doubleValue];
     }
     return NO;
 }
@@ -87,7 +87,7 @@
 
 - (NSUInteger)hash
 {
-    return [self.amount integerValue];
+    return [self.amount doubleValue];
 }
 
 @end

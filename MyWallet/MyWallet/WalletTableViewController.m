@@ -34,11 +34,31 @@
     return self;
 }
 
+//MARK: - Syncing
+- (void)syncModelWithView
+{
+    [self.tableView reloadData];
+}
+
 #pragma mark - View Life Cycle
 - (void)viewDidLoad
 {
     [self.tableView registerNib:[UINib nibWithNibName:@"SubtotalViewCell" bundle:nil] forCellReuseIdentifier:SUBTOTAL_CELL_ID];
     [self.tableView registerNib:[UINib nibWithNibName:@"TotalViewCell" bundle:nil] forCellReuseIdentifier:TOTAL_CELL_ID];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // Alta en notificacion
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(ratesAvailable:) name:RATES_AVAILABLE_NOTIFICATION_NAME object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Table view data source
@@ -93,6 +113,15 @@
 }
 
 #pragma mark - Utilities
+- (NSString*)formatNumber:(Money*)number
+{
+    NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [formatter setMaximumFractionDigits:4];
+    [formatter setRoundingMode:NSNumberFormatterRoundUp];
+    return [formatter stringFromNumber:[NSNumber numberWithFloat:[[number amount] doubleValue]]];
+}
+
 - (UITableViewCell*)getTotalCell:(UITableView*)tableView
 {
     TotalViewCell* cell = (TotalViewCell*)[tableView dequeueReusableCellWithIdentifier:TOTAL_CELL_ID];
@@ -101,8 +130,13 @@
         cell = [nib objectAtIndex:0];
     }
 
-    Money* total = [self.model reduceToCurrency:[self getDefaultCurrency] withBroker:self.broker];
-    cell.totalLabel.text = [NSString stringWithFormat:@"%@ %@", [total currency], [total amount]];
+    @try {
+        Money* total = [self.model reduceToCurrency:[self getDefaultCurrency] withBroker:self.broker];
+        cell.totalLabel.text = [NSString stringWithFormat:@"%@ %@", [total currency], [self formatNumber:total]];
+    }
+    @catch (NSException* e) {
+        cell.totalLabel.text = @"---";
+    }
 
     return cell;
 }
@@ -122,9 +156,13 @@
         subTotal = [subTotal plus:item];
     }
 
-    Money* subTotalReduced = [self.broker reduce:subTotal toCurrency:[self getDefaultCurrency]];
-
-    cell.subTotalLabel.text = [NSString stringWithFormat:@"%@ :(%@)Subtotal", [subTotalReduced amount], [self getDefaultCurrency]];
+    @try {
+        Money* subTotalReduced = [self.broker reduce:subTotal toCurrency:[self getDefaultCurrency]];
+        cell.subTotalLabel.text = [NSString stringWithFormat:@"%@ :(%@)Subtotal", [self formatNumber:subTotalReduced], [self getDefaultCurrency]];
+    }
+    @catch (NSException* e) {
+        cell.subTotalLabel.text = @"---";
+    }
 
     return cell;
 }
@@ -154,6 +192,14 @@
 - (NSString*)getDefaultCurrency
 {
     return @"EUR";
+}
+
+- (void)ratesAvailable:(NSNotification*)notification
+{
+    dispatch_async(dispatch_get_main_queue(),
+        ^{
+            [self syncModelWithView];
+        });
 }
 
 @end
