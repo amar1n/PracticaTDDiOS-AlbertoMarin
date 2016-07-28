@@ -50,8 +50,8 @@
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section < [self.model countCurrencies]) {
-        NSString* currency = [self getCurrencyForSection:section];
+    NSString* currency = [self getCurrencyForSection:section];
+    if (currency != nil) {
         return [[self.model moneysByCurrency:currency] count] + 1;
     }
     else {
@@ -103,7 +103,6 @@
 
     Money* total = [self.model reduceToCurrency:[self getDefaultCurrency] withBroker:self.broker];
     cell.totalLabel.text = [NSString stringWithFormat:@"%@ %@", [total currency], [total amount]];
-    cell.textLabel.adjustsFontSizeToFitWidth = YES;
 
     return cell;
 }

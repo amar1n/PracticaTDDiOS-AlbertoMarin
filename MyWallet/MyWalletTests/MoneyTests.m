@@ -19,26 +19,26 @@
 {
     Money* euro = [Money euroWithAmount:[NSNumber numberWithDouble:5.0]];
     Money* tenEuros = [Money euroWithAmount:[NSNumber numberWithDouble:10.0]];
-    Money* totalEuros = [euro times:2];
+    Money* totalEuros = [euro times:[NSNumber numberWithDouble:2.0]];
     XCTAssertEqualObjects(totalEuros, tenEuros, @"€5 * 2 should be €10!");
 
     Money* dollar = [Money dollarWithAmount:[NSNumber numberWithDouble:5.0]];
     Money* tenDollars = [Money dollarWithAmount:[NSNumber numberWithDouble:10.0]];
-    Money* totalDollars = [dollar times:2];
+    Money* totalDollars = [dollar times:[NSNumber numberWithDouble:2.0]];
     XCTAssertEqualObjects(totalDollars, tenDollars, @"$5 * 2 should be $10!");
 }
 
 - (void)testEquality
 {
     Money* five = [Money euroWithAmount:[NSNumber numberWithDouble:5.0]];
-    Money* total = [five times:2];
+    Money* total = [five times:[NSNumber numberWithDouble:2.0]];
     Money* ten = [Money euroWithAmount:[NSNumber numberWithDouble:10.0]];
     XCTAssertEqualObjects(ten, total, @"Equivalent object should be equal!");
     XCTAssertFalse([total isEqual:five],
         @"Non equivalent object should not be equal!");
 
     Money* fiveDollars = [Money dollarWithAmount:[NSNumber numberWithDouble:5.0]];
-    Money* totalDollars = [fiveDollars times:2];
+    Money* totalDollars = [fiveDollars times:[NSNumber numberWithDouble:2.0]];
     Money* tenDollars = [Money dollarWithAmount:[NSNumber numberWithDouble:10.0]];
     XCTAssertEqualObjects(tenDollars, totalDollars,
         @"Equivalent object should be equal!");

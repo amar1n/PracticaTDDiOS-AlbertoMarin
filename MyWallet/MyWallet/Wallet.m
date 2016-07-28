@@ -57,7 +57,7 @@
     return self;
 }
 
-- (id<Money>)times:(NSInteger)multiplier
+- (id<Money>)times:(NSNumber*)multiplier
 {
     NSMutableArray* newMoneys = [NSMutableArray arrayWithCapacity:self.moneys.count];
     for (Money* item in self.moneys) {

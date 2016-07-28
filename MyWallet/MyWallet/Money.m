@@ -37,9 +37,9 @@
     return self;
 }
 
-- (id<Money>)times:(NSInteger)multiplier
+- (id<Money>)times:(NSNumber*)multiplier
 {
-    Money* newMoney = [[Money alloc] initWithAmount:[NSNumber numberWithDouble:[self.amount doubleValue] * multiplier]
+    Money* newMoney = [[Money alloc] initWithAmount:[NSNumber numberWithDouble:[self.amount doubleValue] * [multiplier doubleValue]]
                                            currency:self.currency];
     return newMoney;
 }
