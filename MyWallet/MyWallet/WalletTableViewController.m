@@ -45,6 +45,10 @@
 {
     [self.tableView registerNib:[UINib nibWithNibName:@"SubtotalViewCell" bundle:nil] forCellReuseIdentifier:SUBTOTAL_CELL_ID];
     [self.tableView registerNib:[UINib nibWithNibName:@"TotalViewCell" bundle:nil] forCellReuseIdentifier:TOTAL_CELL_ID];
+
+    if ([self.model count] > 0) {
+        self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -81,9 +85,6 @@
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    if ([self.model count] == 0)
-        return nil;
-
     NSString* currency = [self getCurrencyForSection:indexPath.section];
 
     if (currency == nil) {
@@ -109,6 +110,36 @@
     }
     else {
         return @"Total";
+    }
+}
+
+- (BOOL)tableView:(UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    NSString* currency = [self getCurrencyForSection:indexPath.section];
+
+    if (currency == nil) {
+        return NO;
+    }
+    else {
+        NSArray* moneysByCurrency = [self.model moneysByCurrency:currency];
+        if (indexPath.row < [moneysByCurrency count]) {
+            return YES;
+        }
+        else {
+            return NO;
+        }
+    }
+}
+
+- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSString* currency = [self getCurrencyForSection:indexPath.section];
+        NSArray* moneysByCurrency = [self.model moneysByCurrency:currency];
+        Money* money = [moneysByCurrency objectAtIndex:indexPath.row];
+        [self.model takeMoney:money];
+
+        [self syncModelWithView];
     }
 }
 

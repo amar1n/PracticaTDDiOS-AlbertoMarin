@@ -90,14 +90,20 @@
     NSMutableArray* moneysOfOneCurrency = [self.moneysByCurrency objectForKey:[money currency]];
     if (moneysOfOneCurrency == nil) {
         moneysOfOneCurrency = [NSMutableArray array];
+        [self.moneysByCurrency setObject:moneysOfOneCurrency forKey:[money currency]];
     }
     [moneysOfOneCurrency addObject:money];
-    [self.moneysByCurrency setObject:moneysOfOneCurrency forKey:[money currency]];
 }
 
 - (void)takeMoney:(Money*)money
 {
     [self.moneys removeObject:money];
+
+    NSMutableArray* moneysOfOneCurrency = [self.moneysByCurrency objectForKey:[money currency]];
+    [moneysOfOneCurrency removeObject:money];
+    if ([moneysOfOneCurrency count] == 0) {
+        [self.moneysByCurrency removeObjectForKey:[money currency]];
+    }
 }
 
 // Retorna un arreglo de Money ordenados por su cantidad de manera ascendente
