@@ -8,19 +8,16 @@
 
 #import "Money.h"
 #import <Foundation/Foundation.h>
-#define RATES_AVAILABLE_NOTIFICATION_NAME @"RatesAvailableNotification"
 
 @interface Broker : NSObject
 
 @property (strong, nonatomic) NSMutableDictionary* rates;
+@property (strong, nonatomic) NSMutableArray* currenciesNames;
 
 - (void)initRates;
 - (Money*)reduce:(id<Money>)money toCurrency:(NSString*)currency;
-- (void)addRate:(NSNumber*)rate
-   fromCurrency:(NSString*)fromCurrency
-     toCurrency:(NSString*)toCurrency;
-- (NSString*)keyFromCurrency:(NSString*)fromCurrency
-                  toCurrency:(NSString*)toCurrency;
+- (void)addRate:(NSNumber*)rate fromCurrency:(NSString*)fromCurrency toCurrency:(NSString*)toCurrency;
+- (NSString*)keyFromCurrency:(NSString*)fromCurrency toCurrency:(NSString*)toCurrency;
 - (void)parseJSONRates:(NSData*)jsonData;
 
 @end

@@ -6,10 +6,13 @@
 //  Copyright © 2016 Alberto Marín García. All rights reserved.
 //
 
+#import "AddMoneyViewControllerDelegate.h"
 #import <UIKit/UIKit.h>
-@class Wallet;
 
-@interface WalletTableViewController : UITableViewController
+@interface WalletTableViewController : UITableViewController <AddMoneyViewControllerDelegate>
+
+@property (nonatomic, strong) Wallet* model;
+@property (nonatomic, strong) Broker* broker;
 
 - (id)initWithModel:(Wallet*)model broker:(Broker*)broker;
 

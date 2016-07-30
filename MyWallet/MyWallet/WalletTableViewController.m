@@ -6,30 +6,27 @@
 //  Copyright © 2016 Alberto Marín García. All rights reserved.
 //
 
+#import "AddMoneyViewController.h"
 #import "Broker.h"
+#import "Constants.h"
 #import "SubtotalViewCell.h"
 #import "TotalViewCell.h"
 #import "Wallet.h"
 #import "WalletTableViewController.h"
 
-#define SUBTOTAL_CELL_ID @"SubTotalCell"
-#define TOTAL_CELL_ID @"TotalCell"
-
 @interface WalletTableViewController ()
-
-@property (nonatomic, strong) Wallet* model;
-@property (nonatomic, strong) Broker* broker;
 
 @end
 
 @implementation WalletTableViewController
 
+#pragma mark - Initialization
 - (id)initWithModel:(Wallet*)model broker:(Broker*)broker
 {
     if (self = [super initWithStyle:UITableViewStylePlain]) {
         _model = model;
         _broker = broker;
-        self.title = @"My Wallet";
+        self.title = APP_NAME;
     }
     return self;
 }
@@ -43,12 +40,15 @@
 #pragma mark - View Life Cycle
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:@"SubtotalViewCell" bundle:nil] forCellReuseIdentifier:SUBTOTAL_CELL_ID];
     [self.tableView registerNib:[UINib nibWithNibName:@"TotalViewCell" bundle:nil] forCellReuseIdentifier:TOTAL_CELL_ID];
 
     if ([self.model count] > 0) {
-        self.navigationItem.rightBarButtonItem = self.editButtonItem;
+        self.navigationItem.leftBarButtonItem = self.editButtonItem;
     }
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(gotoAddMoney:)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -66,7 +66,6 @@
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
     return [self.model countCurrencies] + 1;
@@ -222,7 +221,7 @@
 
 - (NSString*)getDefaultCurrency
 {
-    return @"EUR";
+    return DEFAULT_CURRENCY;
 }
 
 - (void)ratesAvailable:(NSNotification*)notification
@@ -231,6 +230,25 @@
         ^{
             [self syncModelWithView];
         });
+}
+
+- (void)moneyAdded:(NSNotification*)notification
+{
+    [self syncModelWithView];
+}
+
+- (void)gotoAddMoney:(id)sender
+{
+    AddMoneyViewController* moneyVC = [[AddMoneyViewController alloc] initWithBroker:self.broker];
+    moneyVC.delegate = self;
+    [self.navigationController pushViewController:moneyVC animated:YES];
+}
+
+#pragma mark - AddMoneyViewControllerDelegate
+- (void)addMoneyViewControllerDidDismisWithNewMoney:(Money*)money
+{
+    [self.model addMoney:money];
+    [self syncModelWithView];
 }
 
 @end

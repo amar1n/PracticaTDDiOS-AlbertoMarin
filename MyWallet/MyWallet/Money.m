@@ -7,6 +7,7 @@
 //
 
 #import "Broker.h"
+#import "Constants.h"
 #import "Money.h"
 #import "NSObject+GNUStepsAddons.h"
 
@@ -20,12 +21,12 @@
 
 + (id)euroWithAmount:(NSNumber*)amount
 {
-    return [[Money alloc] initWithAmount:amount currency:@"EUR"];
+    return [[Money alloc] initWithAmount:amount currency:EURO_ALPHACODE];
 }
 
 + (id)dollarWithAmount:(NSNumber*)amount
 {
-    return [[Money alloc] initWithAmount:amount currency:@"USD"];
+    return [[Money alloc] initWithAmount:amount currency:DOLLAR_ALPHACODE];
 }
 
 - (id)initWithAmount:(NSNumber*)amount currency:(NSString*)currency

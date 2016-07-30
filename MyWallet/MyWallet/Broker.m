@@ -7,6 +7,7 @@
 //
 
 #import "Broker.h"
+#import "Constants.h"
 #import "Money.h"
 
 @interface Broker ()
@@ -19,20 +20,17 @@
 {
     if (self = [super init]) {
         _rates = [@{} mutableCopy];
+        _currenciesNames = [@[] mutableCopy];
     }
     return self;
 }
 
 - (void)initRates
 {
-    //    NSURL* url = [NSURL URLWithString:@"http://www.floatrates.com/daily/eur.json"];
-    //    NSData* jsonData = [NSData dataWithContentsOfURL:url];
-    //    [self parseJSONRates:jsonData];
-
     dispatch_queue_t cola_x = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(cola_x,
         ^{
-            NSURL* url = [NSURL URLWithString:@"http://www.floatrates.com/daily/eur.json"];
+            NSURL* url = [NSURL URLWithString:RATES_ENDPOINT];
             NSData* jsonData = [NSData dataWithContentsOfURL:url];
             if (jsonData != nil) {
                 [self parseJSONRates:jsonData];
@@ -49,19 +47,27 @@
     return [money reduceToCurrency:currency withBroker:self];
 }
 
-- (void)addRate:(NSNumber*)rate
-   fromCurrency:(NSString*)fromCurrency
-     toCurrency:(NSString*)toCurrency
+- (void)addRate:(NSNumber*)rate fromCurrency:(NSString*)fromCurrency toCurrency:(NSString*)toCurrency
 {
     [self.rates setObject:rate forKey:[self keyFromCurrency:fromCurrency toCurrency:toCurrency]];
+    [self.currenciesNames addObject:toCurrency];
 
-    [self.rates setObject:@(1.0 / [rate doubleValue]) forKey:[self keyFromCurrency:toCurrency toCurrency:fromCurrency]];
+    if (![fromCurrency isEqualToString:toCurrency]) {
+        [self.rates setObject:@(1.0 / [rate doubleValue]) forKey:[self keyFromCurrency:toCurrency toCurrency:fromCurrency]];
+    }
 }
 
-#pragma mark - utils
+#pragma mark - Utils
 - (NSString*)keyFromCurrency:(NSString*)fromCurrency toCurrency:(NSString*)toCurrency
 {
     return [NSString stringWithFormat:@"%@-%@", fromCurrency, toCurrency];
+}
+
+// Retorna los rates ordenados alfabeticamente
+- (NSArray*)ratesNames
+{
+    NSArray* names = [self.rates allKeys];
+    return [names sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }
 
 #pragma mark - Rates
@@ -72,14 +78,18 @@
     }
     NSError* err = nil;
     id obj = [NSJSONSerialization JSONObjectWithData:jsonData
-                                             options:NSJSONReadingAllowFragments
+                                             options:kNilOptions
                                                error:&err];
     if (obj != nil) {
+        [self addRate:@(1.0) fromCurrency:DEFAULT_CURRENCY toCurrency:DEFAULT_CURRENCY];
+
         // Añadimos los rates al broker
         for (NSObject* item in obj) {
             NSDictionary* rate = [obj objectForKey:item];
-            [self addRate:[rate objectForKey:@"rate"] fromCurrency:@"EUR" toCurrency:[rate objectForKey:@"alphaCode"]];
+            NSString* currency = [rate objectForKey:@"alphaCode"];
+            [self addRate:[rate objectForKey:@"rate"] fromCurrency:DEFAULT_CURRENCY toCurrency:currency];
         }
+        self.currenciesNames = [[self.currenciesNames sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] mutableCopy];
     }
     else {
         [NSException raise:@"NoRatesInJSONException" format:@"JSON must carry some data"];
