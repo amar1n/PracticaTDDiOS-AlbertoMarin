@@ -14,5 +14,3 @@
 #define DOLLAR_ALPHACODE @"USD"
 #define DEFAULT_CURRENCY EURO_ALPHACODE
 #define RATES_ENDPOINT @"http://www.floatrates.com/daily/eur.json"
-#define ACCEPTABLE_CHARECTERS @"0123456789."
-#define MAX_LENGTH 5
