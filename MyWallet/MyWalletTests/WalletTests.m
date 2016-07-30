@@ -45,4 +45,20 @@
         @"€40 + $20 = $100 2:1");
 }
 
+- (void)testMultiplication
+{
+    Wallet* wallet = [[Wallet alloc] initWithAmount:[NSNumber numberWithDouble:1.0] currency:@"USD"];
+    [wallet addMoney:[Money euroWithAmount:[NSNumber numberWithDouble:10.0]]];
+    [wallet addMoney:[Money euroWithAmount:[NSNumber numberWithDouble:5.0]]];
+    [wallet addMoney:[Money euroWithAmount:[NSNumber numberWithDouble:1.0]]];
+
+    Broker* broker = [Broker new];
+    [broker addRate:[NSNumber numberWithDouble:2.0] fromCurrency:@"EUR" toCurrency:@"USD"];
+
+    Money* reducedBefore = [broker reduce:wallet toCurrency:@"EUR"];
+    [wallet times:[NSNumber numberWithDouble:3.0]];
+    Money* reducedAfter = [broker reduce:wallet toCurrency:@"EUR"];
+    XCTAssertEqualObjects([reducedAfter amount], [NSNumber numberWithDouble:([[reducedBefore amount] doubleValue] * 3)], @"Debiera ser por 3!!!");
+}
+
 @end

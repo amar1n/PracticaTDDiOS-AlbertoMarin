@@ -44,11 +44,9 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"SubtotalViewCell" bundle:nil] forCellReuseIdentifier:SUBTOTAL_CELL_ID];
     [self.tableView registerNib:[UINib nibWithNibName:@"TotalViewCell" bundle:nil] forCellReuseIdentifier:TOTAL_CELL_ID];
 
-    if ([self.model count] > 0) {
+    if ([[self.model.moneysByCurrency allKeys] count] > 0) {
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
     }
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(gotoAddMoney:)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -68,7 +66,7 @@
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
-    return [self.model countCurrencies] + 1;
+    return [[self.model.moneysByCurrency allKeys] count] + 1;
 }
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
@@ -228,6 +226,7 @@
 {
     dispatch_async(dispatch_get_main_queue(),
         ^{
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(gotoAddMoney:)];
             [self syncModelWithView];
         });
 }

@@ -11,22 +11,9 @@
 
 @interface Wallet ()
 
-@property (strong, nonatomic) NSMutableArray* moneys;
-@property (strong, nonatomic) NSMutableDictionary* moneysByCurrency;
-
 @end
 
 @implementation Wallet
-
-- (NSUInteger)count
-{
-    return [self.moneys count];
-}
-
-- (NSUInteger)countCurrencies
-{
-    return [self.moneysByCurrency count];
-}
 
 // Retorna un arreglo de Strings que representan a las currencies, ordenadas alfabeticamente
 - (NSArray*)currencies
@@ -39,8 +26,6 @@
 {
     if (self = [super init]) {
         Money* money = [[Money alloc] initWithAmount:amount currency:currency];
-        _moneys = [NSMutableArray array];
-        [_moneys addObject:money];
 
         _moneysByCurrency = [NSMutableDictionary dictionary];
         NSMutableArray* moneysOfOneCurrency = [NSMutableArray array];
@@ -59,12 +44,18 @@
 
 - (id<Money>)times:(NSNumber*)multiplier
 {
-    NSMutableArray* newMoneys = [NSMutableArray arrayWithCapacity:self.moneys.count];
-    for (Money* item in self.moneys) {
-        Money* newMoney = [item times:multiplier];
-        [newMoneys addObject:newMoney];
+    NSMutableDictionary* moneysByCurrencyAUX = [NSMutableDictionary dictionary];
+    for (NSString* currency in [[self moneysByCurrency] allKeys]) {
+        NSMutableArray* moneysOfOneCurrencyAUX = [NSMutableArray array];
+        [moneysByCurrencyAUX setObject:moneysOfOneCurrencyAUX forKey:currency];
+
+        for (Money* money in [self.moneysByCurrency objectForKey:currency]) {
+            Money* newMoney = [money times:multiplier];
+            [moneysOfOneCurrencyAUX addObject:newMoney];
+        }
     }
-    self.moneys = newMoneys;
+    self.moneysByCurrency = moneysByCurrencyAUX;
+
     return self;
 }
 
@@ -72,21 +63,14 @@
 {
     Money* result = [[Money alloc] initWithAmount:0 currency:currency];
 
-    for (Money* item in self.moneys) {
+    for (Money* item in [self allMoneys]) {
         result = [result plus:[item reduceToCurrency:currency withBroker:broker]];
     }
     return result;
 }
 
-- (Money*)moneyAtIndex:(int)index
-{
-    return [self.moneys objectAtIndex:index];
-}
-
 - (void)addMoney:(Money*)money
 {
-    [self.moneys addObject:money];
-
     NSMutableArray* moneysOfOneCurrency = [self.moneysByCurrency objectForKey:[money currency]];
     if (moneysOfOneCurrency == nil) {
         moneysOfOneCurrency = [NSMutableArray array];
@@ -97,8 +81,6 @@
 
 - (void)takeMoney:(Money*)money
 {
-    [self.moneys removeObject:money];
-
     NSMutableArray* moneysOfOneCurrency = [self.moneysByCurrency objectForKey:[money currency]];
     [moneysOfOneCurrency removeObject:money];
     if ([moneysOfOneCurrency count] == 0) {
@@ -128,6 +110,19 @@
 
 - (void)dumpToDisk:(NSNotification*)notification
 {
+}
+
+#pragma mark - Utils
+- (NSArray*)allMoneys
+{
+    NSMutableArray* result = [@[] mutableCopy];
+
+    for (NSArray* a in [self.moneysByCurrency allValues]) {
+        for (Money* m in a) {
+            [result addObject:m];
+        }
+    }
+    return result;
 }
 
 @end

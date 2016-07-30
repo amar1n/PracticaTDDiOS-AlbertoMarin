@@ -11,11 +11,10 @@
 
 @interface Wallet : NSObject <Money>
 
-@property (nonatomic, readonly) NSUInteger count;
-@property (nonatomic, readonly) NSUInteger countCurrencies;
+@property (strong, nonatomic) NSMutableDictionary* moneysByCurrency;
+
 @property (nonatomic, readonly) NSArray* currencies;
 
-- (Money*)moneyAtIndex:(int)index;
 - (void)subscribeToMemoryWarning:(NSNotificationCenter*)nc;
 - (void)addMoney:(Money*)money;
 - (void)takeMoney:(Money*)money;
