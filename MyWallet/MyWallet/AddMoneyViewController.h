@@ -17,7 +17,7 @@
 @property (nonatomic, weak) id<AddMoneyViewControllerDelegate> delegate;
 @property (nonatomic, strong) Broker* broker;
 
-@property (weak, nonatomic) IBOutlet UIPickerView* ratesPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView* currenciesPickerView;
 @property (weak, nonatomic) IBOutlet UITextField* amountFieldView;
 @property (weak, nonatomic) IBOutlet UIToolbar* keyboardToolbar;
 

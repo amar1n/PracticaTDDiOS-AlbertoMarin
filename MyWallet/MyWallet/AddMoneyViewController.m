@@ -33,7 +33,7 @@
     [self.amountFieldView resignFirstResponder];
 
     if ([self.broker.currenciesNames count] > 0) {
-        NSInteger currencySelected = [self.ratesPickerView selectedRowInComponent:0];
+        NSInteger currencySelected = [self.currenciesPickerView selectedRowInComponent:0];
         Money* money = [[Money alloc] initWithAmount:[NSNumber numberWithDouble:[self.amountFieldView.text doubleValue]]
                                             currency:[self.broker.currenciesNames objectAtIndex:currencySelected]];
 
@@ -51,7 +51,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.ratesPickerView.delegate = self;
+    self.currenciesPickerView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
